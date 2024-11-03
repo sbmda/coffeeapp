@@ -1,7 +1,7 @@
 {
     "name": "CoffeeJournal",
     "short_name": "CoffeeJournal",
-    "start_url": "/",
+    "start_url": "/coffeeapp/app/index.html",
     "display": "standalone",
     "background_color": "#fcebf2",
     "theme_color": "rgb(249, 249, 250)",
