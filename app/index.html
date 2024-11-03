@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoffeeJournal</title>
+    <link rel="stylesheet" href="utilitaires/bootstrap-5.3.3-dist/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">    <link rel="stylesheet" href="style.css">
+    <script src="utilitaires/jquery-3.7.1.min.js"></script>
+    <script src="utilitaires/bootstrap-5.3.3-dist/js/bootstrap.bundle.js"></script>
+    <link rel="manifest" href="manifest.json">
+    <script src="app.js"></script>
+    
+</head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary shadow">
+        <div class="container-fluid mt-3">
+          <a class="navbar-brand text-center" href="#">hi jessica! <img src="img/iced-coffee.png" style="height: 2em;"></a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 mt-3">
+                <li class="nav-item">
+                  <p class="nav-link" id="sortByPrice">Sort by <strong>price</strong></p>
+                </li>
+                <li class="nav-item">
+                  <p class="nav-link" id="sortByRating">Sort by <strong>rating</strong></p>
+                </li>
+                <li class="nav-item">
+                  <p class="nav-link" id="sortByName">Sort by <strong>name</strong></p>
+                </li>
+              </ul>
+            <form class="d-flex mt-3" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchInput">
+                <button class="btn btn-outline-success" type="button" id="searchBtn">Search</button>                
+            </form>
+          </div>
+        </div>
+      </nav>
+    <main>
+        <div class="container mt-4" style="margin-bottom: 70px" id="mainContainer">
+            <p class="text-secondary text-center">There's nothing here yet. Click <strong>Add</strong> to add a new entry to CoffeeJournal!</p>
+        </div>
+        <div class="offcanvas offcanvas-bottom offcanvas-fullscreen bg-body-tertiary" tabindex="-1" id="newCoffee" aria-labelledby="newCoffee">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title mt-5" id="offcanvasBottomLabel">Add a new coffeeshop</h5>
+              <button type="button" class="btn-close mt-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body small">
+                <form id="ajouterForm">
+                    <label class="form-label" for="newName">Name of the coffeeshop</label>
+                    <input type="text" class="form-control mb-3 shadow-sm" id="newName" required>
+                    <label class="form-label" for="newAddress">Address</label>
+                    <input type="text" class="form-control mb-3 shadow-sm" id="newAddress">
+                    <label class="form-label" for="newOrder">Order</label>
+                    <textarea class="textarea form-control mb-3 shadow-sm" id="newOrder" required></textarea>  
+                    <label for="newPrice" class="form-label">Price</label>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control shadow-sm" id="newPrice" required aria-describedby="priceTag">
+                        <span class="input-group-text shadow-sm" id="priceTag">$</span>
+                    </div>
+                    <label class="form-label" for="rating">Rating</label>
+                    <div class="rating">
+                        <!-- Notice that the stars are in reverse order -->
+        
+                        <input type="radio" id="star5" name="rating" value="5">
+                        <label for="star5">&#9733;</label>
+                        <input type="radio" id="star4" name="rating" value="4">
+                        <label for="star4">&#9733;</label>
+                        <input type="radio" id="star3" name="rating" value="3">
+                        <label for="star3">&#9733;</label>
+                        <input type="radio" id="star2" name="rating" value="2">
+                        <label for="star2">&#9733;</label>
+                        <input type="radio" id="star1" name="rating" value="1">
+                        <label for="star1">&#9733;</label>
+                    </div>
+                    <label class="form-label" for="newReview" required>Full review</label>
+                    <textarea class="textarea form-control mb-3 shadow-sm" id="newReview"></textarea>
+                    <label class="form-label" for="newPhoto">Upload Photo</label>
+                    <input type="file" class="form-control mb-3 shadow-sm" id="newPhoto" accept="image/*">
+                    <div id="addMessage"></div>
+                    <div class="mb-5 mt-3 text-center">
+                        <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="offcanvas" id="dismissAjouter">Close</button>
+                        <button id="finalAddBtn" type="button" class="btn btn-info shadow-sm ml-2">Add</button>
+                      </div>                    
+                  </form>
+            </div>
+          </div>
+          <div class="offcanvas offcanvas-bottom offcanvas-fullscreen bg-body-tertiary" tabindex="-1" id="about" aria-labelledby="about">
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title mt-5" id="offcanvasBottomLabel">About CoffeeJournal</h5>
+              <button type="button" class="btn-close mt-5" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body small">
+                <p><strong>CoffeeJournal</strong> is an app (of sorts) designed and built by yours truly! The goal is to offer you a space to log in all your coffee endeavours, store them on your phone, and find them at the tip of your fingers should you ever wonder about where you had that really good coffee, that one time.</p>
+                <p>Take the time to explore it and let me know what features you'd like added to it! For questions, comments, and suggestions, text me! <img src="img/heart.png" style="height: 2em;"></p>
+                <button type="button" class="btn btn-secondary shadow-sm" data-bs-dismiss="offcanvas" id="dismissAjouter">Close</button>
+            </div>
+          </div>
+          <!-- Modal SUPPRIMER (demande de confirmation) -->
+        <div class="modal fade" id="supprimerModal" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="supprimerTitre" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="supprimerTitre">Delete this entry</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="deleteMessage">
+                  Are you sure you want to delete this CoffeeJournal entry?
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                  <button class="btn btn-danger" data-bs-target="#deleteConfirmer" data-bs-toggle="modal" id="deleteConfirm">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Modal SUPPRIMER (une fois la confirmation effectuée)  -->
+          <div class="modal fade" id="deleteConfirmer" aria-hidden="true" data-bs-backdrop="static" aria-labelledby="confirmerTitre" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="confirmerTitre">Entry deleted</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  The entry was successfully deleted.
+                </div>
+                <div class="modal-footer">
+                  <button class="btn btn-primary" data-bs-dismiss="modal" id="postDelete">OK</button>
+                </div>
+              </div>
+            </div>
+        </div>
+    </main>
+    <footer class="navbar fixed-bottom bg-body-tertiary shadow-lg pt-3">
+        <div class="container mb-3 btn-group" role="group">
+            <button type="button" class="btn btn-light" data-bs-toggle="offcanvas" data-bs-target="#about" aria-controls="about">About</button>
+            <button type="button" class="btn btn-info shadow" style="border-radius: 25px; margin-right:0.2em; color: white;" data-bs-toggle="offcanvas" data-bs-target="#newCoffee" aria-controls="newCoffee"><strong>Add</strong></button>
+            <button type="button" class="btn btn-light disabled">Map</button>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+html *
+{
+   font-family: Poppins !important;
+}
+
+body {
+    background-color: #fcebf2;
+}
+
+main {
+    padding: 1em;
+}
+
+button, [type=button] {
+    border-radius: 25px;
+}
+
+.offcanvas-bottom.offcanvas-fullscreen {
+    height: 100vh !important;   /* Override Bootstrap’s max height */
+    max-height: 100vh !important;
+    top: 0;                     /* Position from the top */
+}
+
+.rating {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row-reverse; /* this is the magic */
+    justify-content: flex-end;
+  }
+  
+  .rating input {
+    display: none;
+  }
+  
+  .rating label {
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .rating label:hover,
+  .rating label:hover ~ label { /* reason why the stars are in reverse order in the html */
+    color: orange;
+  }
+  
+  .rating input:checked ~ label {
+    color: orange;
+  }
